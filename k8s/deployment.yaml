@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: weather-app
-        version: v2
+        version: v3
     spec:
       containers:
         - name: weather-app
