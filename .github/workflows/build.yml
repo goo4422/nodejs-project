@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Push Docker Image and Deploy to EC2
 
 on:
   push:
@@ -24,3 +24,15 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/nodejs-project:latest
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-project:latest
+            docker stop nodeapp || true
+            docker rm nodeapp || true
+            docker run -d --name nodeapp -p 80:3000 ${{ secrets.DOCKER_USERNAME }}/nodejs-project:latest
