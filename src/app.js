@@ -26,7 +26,7 @@ app.get('',(req,res)=>{
 app.get('/about',(req,res)=>{
     res.render('about', {
         title: 'About Me',
-        name: 'Shinebayar. Ts'
+        name: 'purevdorj cicd'
     })
 })
 app.get('/help',(req,res)=>{
