@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,15 +25,12 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/nodejs-project:latest
 
-      - name: Debug EC2_HOST secret
-        run: echo "EC2_HOST is ${{ secrets.EC2_HOST }}"
-
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.EC2_HOST }}
+          host: ${{ secrets.EC2_HOST }}       # Жишээ: ubuntu@3.121.174.69
           username: ubuntu
-          key: ${{ secrets.EC2_KEY }}
+          key: ${{ secrets.EC2_KEY }}         # Private key PEM text
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-project:latest
             docker stop nodeapp || true
