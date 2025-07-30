@@ -19,7 +19,7 @@ app.use(express.static(publicDirectoryPath))
 
 app.get('',(req,res)=>{
     res.render('index', {
-        title: 'Weather App for Docker course',
+        title: 'Weather App for jenkins curse',
         name: 'purevdorj 14:42'
     })
 })
