@@ -13,6 +13,7 @@
     "express": "^4.16.4",
     "hbs": "^4.2.0",
     "lodash": "4.17.15",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "event-stream": "3.3.6"
   }
 }
