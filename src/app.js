@@ -64,6 +64,21 @@ app.get('/weather',(req,res)=>{
         address: req.query.address
     })
 })
+// 🔥 CRITICAL алдаа: хэрэглэгчээс орж ирсэн query-г eval ашиглан шууд ажиллуулж байна
+app.get('/danger', (req, res) => {
+    if (req.query.code) {
+        try {
+            // Хэрэглэгчийн оруулсан JS кодыг шууд ажиллуулж байгаа нь маш аюултай
+            const result = eval(req.query.code)
+            res.send({ result })
+        } catch (e) {
+            res.status(500).send({ error: 'Invalid code' })
+        }
+    } else {
+        res.send({ error: 'No code provided' })
+    }
+})
+
 
 app.get('/products',(req,res)=>{
     if(!req.query.search){
