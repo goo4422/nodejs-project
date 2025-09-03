@@ -20,7 +20,7 @@ app.use(express.static(publicDirectoryPath))
 app.get('',(req,res)=>{
     res.render('index', {
         title: 'example',
-        name: 'purevdorj 08:01'
+        name: 'purevdorj 9 sariin 3 '
     })
 })
 app.get('/about',(req,res)=>{
